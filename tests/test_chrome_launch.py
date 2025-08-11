@@ -2,15 +2,12 @@
 Tests for Chrome browser launching and management.
 """
 
-import asyncio
-import subprocess
 from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
 from surfboard.automation.browser import (
-    ChromeLaunchError,
     ChromeManager,
     kill_existing_chrome_processes,
     launch_chrome_for_testing,
@@ -114,19 +111,9 @@ class TestChromeManager:
         manager.process = MagicMock()
         manager.process.poll.return_value = None  # Process is running
 
-        with patch(
-            "surfboard.automation.browser.test_chrome_connection"
-        ) as mock_test_connection:
-            # Mock the async function to return a coroutine that resolves to True
-            async def mock_async_true(*args, **kwargs):
-                return True
+        result = manager.is_running()
 
-            mock_test_connection.side_effect = mock_async_true
-
-            result = manager.is_running()
-
-            assert result is True
-            mock_test_connection.assert_called_once_with(port=9222)
+        assert result is True
 
     def test_is_running_without_process(self):
         """Test is_running when no process exists."""
@@ -250,4 +237,6 @@ async def test_real_chrome_launch():
                 {"expression": "navigator.userAgent", "returnByValue": True},
             )
 
-            assert "Chrome" in result["value"]
+            # Handle both possible result structures
+            user_agent = result.get("value") or result.get("result", {}).get("value", "")
+            assert "Chrome" in str(user_agent)

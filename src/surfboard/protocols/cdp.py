@@ -1,7 +1,7 @@
 """
 Chrome DevTools Protocol (CDP) implementation.
 
-This module provides a Python client for communicating with Chrome 
+This module provides a Python client for communicating with Chrome
 via the DevTools Protocol over WebSocket connections.
 """
 

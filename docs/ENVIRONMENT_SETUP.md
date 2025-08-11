@@ -41,10 +41,10 @@ Documentation: mkdocs
 
 1. **Faster POC development** in Phase 0
 2. **Better LLM integration libraries**
-3. **Cross-platform compatibility** 
+3. **Cross-platform compatibility**
 4. **Easier CDP protocol implementation**
 
-**Proposed Roadmap Update**: 
+**Proposed Roadmap Update**:
 - Phase 0: Python-based POCs and core functionality
 - Phase 1-2: Python implementation with Windows API bindings
 - Phase 3+: Consider native Windows components if performance requires it

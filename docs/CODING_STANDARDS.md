@@ -19,7 +19,7 @@ from typing import Optional, List, Dict, Any
 import asyncio
 
 async def process_request(
-    data: Dict[str, Any], 
+    data: Dict[str, Any],
     timeout: Optional[float] = None
 ) -> List[str]:
     """Process request with optional timeout."""
@@ -35,13 +35,13 @@ async def process_request(
 ```python
 async def connect_to_chrome(port: int = 9222) -> CDPClient:
     """Connect to Chrome DevTools Protocol.
-    
+
     Args:
         port: Chrome debugging port (default: 9222)
-        
+
     Returns:
         Connected CDP client instance
-        
+
     Raises:
         ConnectionError: If unable to connect to Chrome
         ValueError: If port is invalid
@@ -145,7 +145,7 @@ class SurfboardConfig(BaseSettings):
     chrome_port: int = 9222
     websocket_port: int = 8765
     log_level: str = "INFO"
-    
+
     class Config:
         env_prefix = "SURFBOARD_"
         case_sensitive = False
@@ -177,7 +177,7 @@ async def test_cdp_client_connection_timeout():
     """Test CDP client handles connection timeout properly."""
     # Arrange
     invalid_port = 99999
-    
+
     # Act & Assert
     with pytest.raises(ConnectionError):
         async with CDPClient(port=invalid_port, timeout=1.0) as client:
@@ -262,7 +262,7 @@ Longer description if needed
 
 ### Pre-commit Hooks
 - Black (formatting)
-- isort (import sorting) 
+- isort (import sorting)
 - flake8 (linting)
 - mypy (type checking)
 - pytest (run tests)

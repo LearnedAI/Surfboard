@@ -5,7 +5,7 @@ This module will contain the main SurfboardClient class that orchestrates
 browser automation through multiple protocols.
 """
 
-from typing import Optional
+# from typing import Optional  # Currently unused but will be needed
 
 
 class SurfboardClient:

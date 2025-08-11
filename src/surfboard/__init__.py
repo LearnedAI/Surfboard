@@ -1,7 +1,7 @@
 """
-Surfboard - Windows Chrome Automation Bridge for LLM Integration
+Surfboard - Windows Chrome Automation Bridge for LLM Integration.
 
-A native Windows automation bridge that enables LLMs to control Google Chrome 
+A native Windows automation bridge that enables LLMs to control Google Chrome
 through intelligent protocol selection.
 """
 

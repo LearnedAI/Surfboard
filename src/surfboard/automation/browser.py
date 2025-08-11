@@ -14,7 +14,7 @@ import subprocess
 import tempfile
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 import psutil
 
@@ -100,7 +100,7 @@ class ChromeManager:
             # Since we can't use asyncio.run from async context, just check process
             return True
         return False
-    
+
     async def is_running_async(self) -> bool:
         """Async version of is_running that can test CDP connection.
 

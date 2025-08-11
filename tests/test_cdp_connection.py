@@ -5,16 +5,13 @@ This module contains basic tests for the Chrome DevTools Protocol client,
 including connection tests and basic command execution.
 """
 
-import asyncio
-import json
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, patch
 
 import pytest
 
 from surfboard.protocols.cdp import (
     CDPClient,
     CDPConnectionError,
-    CDPTimeoutError,
     get_chrome_version,
     test_chrome_connection,
 )
