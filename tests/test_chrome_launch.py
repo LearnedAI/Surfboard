@@ -238,5 +238,7 @@ async def test_real_chrome_launch():
             )
 
             # Handle both possible result structures
-            user_agent = result.get("value") or result.get("result", {}).get("value", "")
+            user_agent = result.get("value") or result.get("result", {}).get(
+                "value", ""
+            )
             assert "Chrome" in str(user_agent)
