@@ -23,9 +23,9 @@ function addExtensionIndicator() {
     opacity: 0.8;
   `;
   indicator.textContent = 'Surfboard Test Extension Active';
-  
+
   document.body.appendChild(indicator);
-  
+
   // Remove indicator after 3 seconds
   setTimeout(() => {
     if (indicator.parentNode) {
@@ -44,7 +44,7 @@ if (document.readyState === 'loading') {
 // Listen for messages from background script or injected scripts
 window.addEventListener('message', (event) => {
   if (event.source !== window) return;
-  
+
   if (event.data.type === 'SURFBOARD_TEST') {
     // Forward test messages to background script
     chrome.runtime.sendMessage({

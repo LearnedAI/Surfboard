@@ -15,12 +15,12 @@ chrome.runtime.onInstalled.addListener(connectToNativeHost);
 function connectToNativeHost() {
   try {
     nativePort = chrome.runtime.connectNative(NATIVE_HOST);
-    
+
     nativePort.onMessage.addListener((message) => {
       console.log('Received from native host:', message);
       handleNativeMessage(message);
     });
-    
+
     nativePort.onDisconnect.addListener(() => {
       console.log('Native host disconnected');
       if (chrome.runtime.lastError) {
@@ -28,10 +28,10 @@ function connectToNativeHost() {
       }
       nativePort = null;
     });
-    
+
     // Send initial hello message
     sendToNativeHost({ type: 'hello', timestamp: Date.now() });
-    
+
   } catch (error) {
     console.error('Failed to connect to native host:', error);
   }
@@ -50,7 +50,7 @@ function handleNativeMessage(message) {
     case 'ping':
       sendToNativeHost({ type: 'pong', timestamp: Date.now() });
       break;
-      
+
     case 'test_command':
       // Simulate executing a test command
       sendToNativeHost({
@@ -59,7 +59,7 @@ function handleNativeMessage(message) {
         data: { message: 'Test command executed successfully' }
       });
       break;
-      
+
     default:
       console.log('Unknown message type:', message.type);
   }

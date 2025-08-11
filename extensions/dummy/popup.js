@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pingBtn = document.getElementById('ping-btn');
   const testCmdBtn = document.getElementById('test-cmd-btn');
   const clearLogBtn = document.getElementById('clear-log-btn');
-  
+
   function log(message) {
     const timestamp = new Date().toLocaleTimeString();
     const logEntry = document.createElement('div');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     logDiv.appendChild(logEntry);
     logDiv.scrollTop = logDiv.scrollHeight;
   }
-  
+
   function updateStatus(connected) {
     if (connected) {
       statusDiv.className = 'status connected';
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       testCmdBtn.disabled = true;
     }
   }
-  
+
   // Check connection status by sending message to background
   chrome.runtime.sendMessage({ type: 'check_connection' }, (response) => {
     if (chrome.runtime.lastError) {
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateStatus(response && response.connected);
     }
   });
-  
+
   // Button event listeners
   pingBtn.addEventListener('click', () => {
     chrome.runtime.sendMessage({
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-  
+
   testCmdBtn.addEventListener('click', () => {
     chrome.runtime.sendMessage({
       type: 'send_to_native',
@@ -72,17 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-  
+
   clearLogBtn.addEventListener('click', () => {
     logDiv.innerHTML = '';
   });
-  
+
   // Listen for messages from background script
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === 'native_message') {
       log(`Received: ${JSON.stringify(message.data)}`);
     }
   });
-  
+
   log('Popup initialized');
 });
