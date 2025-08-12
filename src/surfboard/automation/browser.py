@@ -174,8 +174,12 @@ class ChromeManager:
                 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
             ]
         else:
-            # Linux Chrome locations
+            # Linux Chrome locations (including WSL)
             possible_paths = [
+                # WSL-specific Windows Chrome paths
+                "/mnt/c/Program Files/Google/Chrome/Application/chrome.exe",
+                "/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+                # Standard Linux paths
                 "/usr/bin/google-chrome",
                 "/usr/bin/google-chrome-stable",
                 "/usr/bin/chromium",
