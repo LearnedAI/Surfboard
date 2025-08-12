@@ -1,0 +1,226 @@
+{
+  "$defs": {
+    "BaseCommand": {
+      "description": "Base command structure.",
+      "properties": {
+        "command_id": {
+          "description": "Unique command ID",
+          "title": "Command Id",
+          "type": "string"
+        },
+        "command_type": {
+          "$ref": "#/$defs/CommandType",
+          "description": "Type of command"
+        },
+        "timestamp": {
+          "description": "Command timestamp",
+          "title": "Timestamp",
+          "type": "number"
+        },
+        "browser_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Target browser instance",
+          "title": "Browser Id"
+        },
+        "timeout": {
+          "default": 30.0,
+          "description": "Command timeout in seconds",
+          "title": "Timeout",
+          "type": "number"
+        }
+      },
+      "required": [
+        "command_type"
+      ],
+      "title": "BaseCommand",
+      "type": "object"
+    },
+    "BaseResponse": {
+      "description": "Base response structure.",
+      "properties": {
+        "command_id": {
+          "description": "Original command ID",
+          "title": "Command Id",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/StatusType",
+          "description": "Execution status"
+        },
+        "timestamp": {
+          "description": "Response timestamp",
+          "title": "Timestamp",
+          "type": "number"
+        },
+        "execution_time": {
+          "description": "Command execution time in seconds",
+          "title": "Execution Time",
+          "type": "number"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Status message",
+          "title": "Message"
+        }
+      },
+      "required": [
+        "command_id",
+        "status",
+        "execution_time"
+      ],
+      "title": "BaseResponse",
+      "type": "object"
+    },
+    "CommandType": {
+      "description": "Available command types for LLM requests.",
+      "enum": [
+        "navigate",
+        "reload",
+        "go_back",
+        "go_forward",
+        "find_element",
+        "find_elements",
+        "click",
+        "type_text",
+        "clear_text",
+        "get_text",
+        "get_attribute",
+        "get_page_title",
+        "get_page_url",
+        "get_page_source",
+        "take_screenshot",
+        "get_element_screenshot",
+        "execute_script",
+        "get_page_summary",
+        "analyze_elements",
+        "get_form_data",
+        "wait_for_element",
+        "wait_for_page_load",
+        "sleep",
+        "create_browser",
+        "close_browser",
+        "switch_browser",
+        "list_browsers"
+      ],
+      "title": "CommandType",
+      "type": "string"
+    },
+    "StatusType": {
+      "description": "Command execution status types.",
+      "enum": [
+        "success",
+        "error",
+        "timeout",
+        "not_found",
+        "invalid_input"
+      ],
+      "title": "StatusType",
+      "type": "string"
+    }
+  },
+  "description": "Complete LLM message wrapper.",
+  "properties": {
+    "version": {
+      "default": "1.0",
+      "description": "Protocol version",
+      "title": "Version",
+      "type": "string"
+    },
+    "message_id": {
+      "description": "Message ID",
+      "title": "Message Id",
+      "type": "string"
+    },
+    "timestamp": {
+      "description": "Message timestamp",
+      "title": "Timestamp",
+      "type": "number"
+    },
+    "source": {
+      "default": "llm",
+      "description": "Message source",
+      "title": "Source",
+      "type": "string"
+    },
+    "command": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/BaseCommand"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Command payload"
+    },
+    "response": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/BaseResponse"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Response payload"
+    },
+    "batch_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Batch processing ID",
+      "title": "Batch Id"
+    },
+    "is_batch": {
+      "default": false,
+      "description": "Is part of batch",
+      "title": "Is Batch",
+      "type": "boolean"
+    },
+    "session_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Session identifier",
+      "title": "Session Id"
+    },
+    "context": {
+      "additionalProperties": true,
+      "description": "Additional context",
+      "title": "Context",
+      "type": "object"
+    }
+  },
+  "title": "LLMMessage",
+  "type": "object"
+}

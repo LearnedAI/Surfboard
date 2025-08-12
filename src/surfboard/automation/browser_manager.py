@@ -230,8 +230,7 @@ class BrowserManager:
             # Create Chrome manager
             manager = ChromeManager(
                 debugging_port=port,
-                headless=headless,
-                user_data_dir=profile_path
+                headless=headless
             )
             
             try:

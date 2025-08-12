@@ -1,0 +1,7 @@
+{
+  "success": "success",
+  "error": "error",
+  "timeout": "timeout",
+  "not_found": "not_found",
+  "invalid_input": "invalid_input"
+}

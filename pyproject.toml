@@ -90,6 +90,9 @@ testpaths = ["tests"]
 asyncio_mode = "auto"
 markers = [
     "manual: marks tests as manual/integration tests that require real Chrome (deselect with '-m \"not manual\"')",
+    "performance: marks tests as performance/stress tests (deselect with '-m \"not performance\"')",
+    "integration: marks tests as integration tests requiring real Chrome instances",
+    "slow: marks tests as slow-running tests",
 ]
 
 [tool.coverage.run]

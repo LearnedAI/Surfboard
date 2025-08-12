@@ -1,0 +1,786 @@
+{
+  "base_response": {
+    "$defs": {
+      "StatusType": {
+        "description": "Command execution status types.",
+        "enum": [
+          "success",
+          "error",
+          "timeout",
+          "not_found",
+          "invalid_input"
+        ],
+        "title": "StatusType",
+        "type": "string"
+      }
+    },
+    "description": "Base response structure.",
+    "properties": {
+      "command_id": {
+        "description": "Original command ID",
+        "title": "Command Id",
+        "type": "string"
+      },
+      "status": {
+        "$ref": "#/$defs/StatusType",
+        "description": "Execution status"
+      },
+      "timestamp": {
+        "description": "Response timestamp",
+        "title": "Timestamp",
+        "type": "number"
+      },
+      "execution_time": {
+        "description": "Command execution time in seconds",
+        "title": "Execution Time",
+        "type": "number"
+      },
+      "message": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Status message",
+        "title": "Message"
+      }
+    },
+    "required": [
+      "command_id",
+      "status",
+      "execution_time"
+    ],
+    "title": "BaseResponse",
+    "type": "object"
+  },
+  "find_element": {
+    "$defs": {
+      "ElementInfo": {
+        "description": "Element information.",
+        "properties": {
+          "tag_name": {
+            "description": "HTML tag name",
+            "title": "Tag Name",
+            "type": "string"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Element text content",
+            "title": "Text"
+          },
+          "attributes": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Element attributes",
+            "title": "Attributes",
+            "type": "object"
+          },
+          "is_visible": {
+            "description": "Element visibility",
+            "title": "Is Visible",
+            "type": "boolean"
+          },
+          "bounding_box": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "number"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Element bounding box",
+            "title": "Bounding Box"
+          }
+        },
+        "required": [
+          "tag_name",
+          "is_visible"
+        ],
+        "title": "ElementInfo",
+        "type": "object"
+      },
+      "StatusType": {
+        "description": "Command execution status types.",
+        "enum": [
+          "success",
+          "error",
+          "timeout",
+          "not_found",
+          "invalid_input"
+        ],
+        "title": "StatusType",
+        "type": "string"
+      }
+    },
+    "description": "Find element response.",
+    "properties": {
+      "command_id": {
+        "description": "Original command ID",
+        "title": "Command Id",
+        "type": "string"
+      },
+      "status": {
+        "$ref": "#/$defs/StatusType",
+        "description": "Execution status"
+      },
+      "timestamp": {
+        "description": "Response timestamp",
+        "title": "Timestamp",
+        "type": "number"
+      },
+      "execution_time": {
+        "description": "Command execution time in seconds",
+        "title": "Execution Time",
+        "type": "number"
+      },
+      "message": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Status message",
+        "title": "Message"
+      },
+      "element_found": {
+        "description": "Whether element was found",
+        "title": "Element Found",
+        "type": "boolean"
+      },
+      "elements": {
+        "description": "Found elements",
+        "items": {
+          "$ref": "#/$defs/ElementInfo"
+        },
+        "title": "Elements",
+        "type": "array"
+      },
+      "total_count": {
+        "default": 0,
+        "description": "Total elements found",
+        "title": "Total Count",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "command_id",
+      "status",
+      "execution_time",
+      "element_found"
+    ],
+    "title": "FindElementResponse",
+    "type": "object"
+  },
+  "text": {
+    "$defs": {
+      "StatusType": {
+        "description": "Command execution status types.",
+        "enum": [
+          "success",
+          "error",
+          "timeout",
+          "not_found",
+          "invalid_input"
+        ],
+        "title": "StatusType",
+        "type": "string"
+      }
+    },
+    "description": "Text content response.",
+    "properties": {
+      "command_id": {
+        "description": "Original command ID",
+        "title": "Command Id",
+        "type": "string"
+      },
+      "status": {
+        "$ref": "#/$defs/StatusType",
+        "description": "Execution status"
+      },
+      "timestamp": {
+        "description": "Response timestamp",
+        "title": "Timestamp",
+        "type": "number"
+      },
+      "execution_time": {
+        "description": "Command execution time in seconds",
+        "title": "Execution Time",
+        "type": "number"
+      },
+      "message": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Status message",
+        "title": "Message"
+      },
+      "text": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Retrieved text",
+        "title": "Text"
+      },
+      "length": {
+        "default": 0,
+        "description": "Text length",
+        "title": "Length",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "command_id",
+      "status",
+      "execution_time"
+    ],
+    "title": "TextResponse",
+    "type": "object"
+  },
+  "screenshot": {
+    "$defs": {
+      "StatusType": {
+        "description": "Command execution status types.",
+        "enum": [
+          "success",
+          "error",
+          "timeout",
+          "not_found",
+          "invalid_input"
+        ],
+        "title": "StatusType",
+        "type": "string"
+      }
+    },
+    "description": "Screenshot response.",
+    "properties": {
+      "command_id": {
+        "description": "Original command ID",
+        "title": "Command Id",
+        "type": "string"
+      },
+      "status": {
+        "$ref": "#/$defs/StatusType",
+        "description": "Execution status"
+      },
+      "timestamp": {
+        "description": "Response timestamp",
+        "title": "Timestamp",
+        "type": "number"
+      },
+      "execution_time": {
+        "description": "Command execution time in seconds",
+        "title": "Execution Time",
+        "type": "number"
+      },
+      "message": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Status message",
+        "title": "Message"
+      },
+      "image_data": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Base64 encoded image data",
+        "title": "Image Data"
+      },
+      "image_path": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Saved image file path",
+        "title": "Image Path"
+      },
+      "image_format": {
+        "default": "png",
+        "description": "Image format",
+        "title": "Image Format",
+        "type": "string"
+      },
+      "dimensions": {
+        "additionalProperties": {
+          "type": "integer"
+        },
+        "description": "Image dimensions",
+        "title": "Dimensions",
+        "type": "object"
+      }
+    },
+    "required": [
+      "command_id",
+      "status",
+      "execution_time"
+    ],
+    "title": "ScreenshotResponse",
+    "type": "object"
+  },
+  "script": {
+    "$defs": {
+      "StatusType": {
+        "description": "Command execution status types.",
+        "enum": [
+          "success",
+          "error",
+          "timeout",
+          "not_found",
+          "invalid_input"
+        ],
+        "title": "StatusType",
+        "type": "string"
+      }
+    },
+    "description": "JavaScript execution response.",
+    "properties": {
+      "command_id": {
+        "description": "Original command ID",
+        "title": "Command Id",
+        "type": "string"
+      },
+      "status": {
+        "$ref": "#/$defs/StatusType",
+        "description": "Execution status"
+      },
+      "timestamp": {
+        "description": "Response timestamp",
+        "title": "Timestamp",
+        "type": "number"
+      },
+      "execution_time": {
+        "description": "Command execution time in seconds",
+        "title": "Execution Time",
+        "type": "number"
+      },
+      "message": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Status message",
+        "title": "Message"
+      },
+      "result": {
+        "default": null,
+        "description": "Script execution result",
+        "title": "Result"
+      },
+      "console_logs": {
+        "description": "Console output",
+        "items": {
+          "type": "string"
+        },
+        "title": "Console Logs",
+        "type": "array"
+      }
+    },
+    "required": [
+      "command_id",
+      "status",
+      "execution_time"
+    ],
+    "title": "ScriptResponse",
+    "type": "object"
+  },
+  "page_summary": {
+    "$defs": {
+      "PageInfo": {
+        "description": "Page information summary.",
+        "properties": {
+          "title": {
+            "description": "Page title",
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "description": "Current URL",
+            "title": "Url",
+            "type": "string"
+          },
+          "domain": {
+            "description": "Page domain",
+            "title": "Domain",
+            "type": "string"
+          },
+          "meta_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Meta description",
+            "title": "Meta Description"
+          },
+          "headings": {
+            "description": "Page headings",
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "title": "Headings",
+            "type": "array"
+          },
+          "links": {
+            "description": "Page links",
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "title": "Links",
+            "type": "array"
+          },
+          "images": {
+            "description": "Page images",
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "title": "Images",
+            "type": "array"
+          },
+          "forms": {
+            "description": "Page forms",
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Forms",
+            "type": "array"
+          },
+          "text_content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Main text content",
+            "title": "Text Content"
+          },
+          "word_count": {
+            "default": 0,
+            "description": "Approximate word count",
+            "title": "Word Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "title",
+          "url",
+          "domain"
+        ],
+        "title": "PageInfo",
+        "type": "object"
+      },
+      "StatusType": {
+        "description": "Command execution status types.",
+        "enum": [
+          "success",
+          "error",
+          "timeout",
+          "not_found",
+          "invalid_input"
+        ],
+        "title": "StatusType",
+        "type": "string"
+      }
+    },
+    "description": "Page summary response.",
+    "properties": {
+      "command_id": {
+        "description": "Original command ID",
+        "title": "Command Id",
+        "type": "string"
+      },
+      "status": {
+        "$ref": "#/$defs/StatusType",
+        "description": "Execution status"
+      },
+      "timestamp": {
+        "description": "Response timestamp",
+        "title": "Timestamp",
+        "type": "number"
+      },
+      "execution_time": {
+        "description": "Command execution time in seconds",
+        "title": "Execution Time",
+        "type": "number"
+      },
+      "message": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Status message",
+        "title": "Message"
+      },
+      "page_info": {
+        "$ref": "#/$defs/PageInfo",
+        "description": "Page information"
+      },
+      "elements_analyzed": {
+        "default": 0,
+        "description": "Number of elements analyzed",
+        "title": "Elements Analyzed",
+        "type": "integer"
+      },
+      "processing_time": {
+        "default": 0.0,
+        "description": "Summary processing time",
+        "title": "Processing Time",
+        "type": "number"
+      }
+    },
+    "required": [
+      "command_id",
+      "status",
+      "execution_time",
+      "page_info"
+    ],
+    "title": "PageSummaryResponse",
+    "type": "object"
+  },
+  "list_browsers": {
+    "$defs": {
+      "BrowserInfo": {
+        "description": "Browser instance information.",
+        "properties": {
+          "browser_id": {
+            "description": "Browser instance ID",
+            "title": "Browser Id",
+            "type": "string"
+          },
+          "is_active": {
+            "description": "Whether browser is active",
+            "title": "Is Active",
+            "type": "boolean"
+          },
+          "current_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Current URL",
+            "title": "Current Url"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Current page title",
+            "title": "Title"
+          },
+          "viewport": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Viewport"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Viewport configuration"
+          },
+          "created_at": {
+            "description": "Creation timestamp",
+            "title": "Created At",
+            "type": "number"
+          }
+        },
+        "required": [
+          "browser_id",
+          "is_active",
+          "created_at"
+        ],
+        "title": "BrowserInfo",
+        "type": "object"
+      },
+      "StatusType": {
+        "description": "Command execution status types.",
+        "enum": [
+          "success",
+          "error",
+          "timeout",
+          "not_found",
+          "invalid_input"
+        ],
+        "title": "StatusType",
+        "type": "string"
+      },
+      "Viewport": {
+        "description": "Browser viewport configuration.",
+        "properties": {
+          "width": {
+            "default": 1280,
+            "description": "Viewport width",
+            "title": "Width",
+            "type": "integer"
+          },
+          "height": {
+            "default": 720,
+            "description": "Viewport height",
+            "title": "Height",
+            "type": "integer"
+          },
+          "device_scale_factor": {
+            "default": 1.0,
+            "description": "Device scale factor",
+            "title": "Device Scale Factor",
+            "type": "number"
+          },
+          "mobile": {
+            "default": false,
+            "description": "Mobile emulation",
+            "title": "Mobile",
+            "type": "boolean"
+          }
+        },
+        "title": "Viewport",
+        "type": "object"
+      }
+    },
+    "description": "List browsers response.",
+    "properties": {
+      "command_id": {
+        "description": "Original command ID",
+        "title": "Command Id",
+        "type": "string"
+      },
+      "status": {
+        "$ref": "#/$defs/StatusType",
+        "description": "Execution status"
+      },
+      "timestamp": {
+        "description": "Response timestamp",
+        "title": "Timestamp",
+        "type": "number"
+      },
+      "execution_time": {
+        "description": "Command execution time in seconds",
+        "title": "Execution Time",
+        "type": "number"
+      },
+      "message": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Status message",
+        "title": "Message"
+      },
+      "browsers": {
+        "description": "Active browsers",
+        "items": {
+          "$ref": "#/$defs/BrowserInfo"
+        },
+        "title": "Browsers",
+        "type": "array"
+      },
+      "total_count": {
+        "default": 0,
+        "description": "Total browser count",
+        "title": "Total Count",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "command_id",
+      "status",
+      "execution_time"
+    ],
+    "title": "ListBrowsersResponse",
+    "type": "object"
+  }
+}

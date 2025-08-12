@@ -1,0 +1,48 @@
+{
+  "$defs": {
+    "ElementSelectorType": {
+      "description": "Types of element selectors.",
+      "enum": [
+        "css",
+        "xpath",
+        "text",
+        "placeholder",
+        "role",
+        "aria_label",
+        "tag_name"
+      ],
+      "title": "ElementSelectorType",
+      "type": "string"
+    }
+  },
+  "description": "Element selector with multiple strategies.",
+  "properties": {
+    "type": {
+      "$ref": "#/$defs/ElementSelectorType",
+      "description": "Selector type"
+    },
+    "value": {
+      "description": "Selector value",
+      "title": "Value",
+      "type": "string"
+    },
+    "timeout": {
+      "default": 10.0,
+      "description": "Timeout in seconds",
+      "title": "Timeout",
+      "type": "number"
+    },
+    "visible_only": {
+      "default": true,
+      "description": "Only find visible elements",
+      "title": "Visible Only",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "type",
+    "value"
+  ],
+  "title": "ElementSelector",
+  "type": "object"
+}

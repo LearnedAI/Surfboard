@@ -1,0 +1,31 @@
+{
+  "description": "Browser viewport configuration.",
+  "properties": {
+    "width": {
+      "default": 1280,
+      "description": "Viewport width",
+      "title": "Width",
+      "type": "integer"
+    },
+    "height": {
+      "default": 720,
+      "description": "Viewport height",
+      "title": "Height",
+      "type": "integer"
+    },
+    "device_scale_factor": {
+      "default": 1.0,
+      "description": "Device scale factor",
+      "title": "Device Scale Factor",
+      "type": "number"
+    },
+    "mobile": {
+      "default": false,
+      "description": "Mobile emulation",
+      "title": "Mobile",
+      "type": "boolean"
+    }
+  },
+  "title": "Viewport",
+  "type": "object"
+}
